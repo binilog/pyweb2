@@ -4,7 +4,7 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th>번호</th><th>제목</th><th>작성일시</th>
+                <th>Num</th><th>Title</th><th>Writer</th><th>Date Created</th>
             </tr>
         </thead>
         <tbody>
@@ -18,16 +18,17 @@
                             {{ question.subject }}
                         </a>
                     </td>
+                    <td>{{ question.author }}</td>
                     <td>{{ question.create_date }}</td>
                 </tr>
                 {% endfor %}
             {% else %}
-            <p>질문이 없습니다.</p>
+            <p>No Questions</p>
             {% endif %}
         </tbody>
     </table>
     <a class="btn btn-primary"
-       href="{% url 'board:question_create' %}">질문 등록</a>
+       href="{% url 'board:question_create' %}">Register a question</a>
 </div>
 {% endblock %}
 

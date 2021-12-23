@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <h5 class="border-bottom my-3 py-2">{{question.answer_set.count}}개의 답변이 있습니다.</h5>
+    <h5 class="border-bottom my-3 py-2">There are {{question.answer_set.count}} answers.</h5>
     {% for answer in question.answer_set.all %}
     <div class="card my-3">
         <div class="card-body">
@@ -30,6 +30,6 @@
         <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
-        <input type="submit" value="답변등록" class="btn btn-primary">
+        <input type="submit" value="Register an answer" class="btn btn-primary">
     </form>
 </div>

@@ -8,14 +8,20 @@
                 {{ question.content }}
             </div>
             <div class="d-flex justify-content-end">
-                <div class="badge bagde-light">
-                    {{ question.create_date }}
+                <div class="badge bagde-light text-light">
+                    <div class="mb-2">{{ question.author }}</div>
+                    <div>{{ question.create_date }}</div>
                 </div>
+            </div>
+            {% if request.user == question.author %}
+            <div>
+                <a href="{% url 'borad:question_modify' question.id %}"></a>
+                <a href="{% url 'borad:question_modify"></a>
             </div>
         </div>
     </div>
     <h5 class="border-bottom my-3 py-2">
-        {{ question.answer_set.count }}개의 답변이 있습니다.
+        There are {{ question.answer_set.count }} answers.
     </h5>
     {% for answer in question.answer_set.all %}
     <div class="card my-3">
@@ -46,9 +52,22 @@
             {% endif %}
         <!-- 오류 표시 끝-->
         <div class="form-group">
-            <textarea name="content" rows="7" cols="50" class="form-control"></textarea>
+            <textarea name="content" rows="7" cols="50" class="form-control"
+                    {% if not user.is_authenticated %}
+                        disabled
+
+                    {% endif %}></textarea>
         </div>
-        <input type="submit" value="답변 등록" class="btn btn-primary">
+        <input type="submit" value="Register an answer" class="btn btn-primary">
     </form>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        if(confirm('정말로 삭제하시겠습니까?')){
+            location.href = $(this).data('uri')
+        }
+    });
+</script>
 {% endblock %}
