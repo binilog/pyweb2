@@ -14,5 +14,17 @@ urlpatterns = [
     #답변 등록
     path('answer/create/<int:question_id>/', views.answer_create, name='answer_create'),
     #질문 수정
-    path('question/modify/<int:question_id>/', views.question_modify, name='question_modify')
+    path('question/modify/<int:question_id>/', views.question_modify,
+         name='question_modify'),
+    #질문 삭제
+    path('question/delete/<int:question_id>/', views.question_delete,
+         name='question_delete'),
+    #답변 수정
+    path('answer/modify/<int:answer_id>/', views.answer_modify, name='answer_modify'),
+    #답변 삭제
+    path('answer/delete/<int:answer_id>/', views.answer_delete, name='answer_delete'),
+
+    path('comment/create/question/<int:question_id>/', views.comment_create_question, name='comment_create_question'),
+    path('comment/modify/question/<int:comment_id>/', views.comment_modify_question, name='comment_modify_question'),
+    path('comment/delete/question/<int:comment_id>/', views.comment_delete_question, name='comment_delete_question'),
 ]

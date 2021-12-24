@@ -3,17 +3,17 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-4">
-            <h4>Register</h4>
+            <h4>Sign Up</h4>
         </div>
         <div class="col-8 text-right">
-            <span>Or <a href="{% url 'common:login' %}">Please login</a></span>
+            <span>또는 <a href="{% url 'common:login' %}">Please log in</a></span>
         </div>
-        </div>
+    </div>
     <form action="" method="post" class="my-3">
         {% csrf_token %}
         {% include 'form_errors.html' %}
         <div class="form-group">
-            <label for="username">User ID</label>
+            <label for="username">UserID</label>
             <input type="text" class="form-control" id="username" name="username"
                    value="{{ form.username.value|default_if_none:'' }}">
             <!-- name 속성값은 반드시 username로 할 것-->
@@ -25,19 +25,18 @@
             <!-- name 속성값은 반드시 username로 할 것-->
         </div>
         <div class="form-group">
-            <label for="password2">Password Check</label>
+            <label for="password2">Verify Password</label>
             <input type="password" class="form-control" id="password2" name="password2"
                    value="{{ form.password2.value|default_if_none:'' }}">
             <!-- name 속성값은 반드시 username로 할 것-->
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">E-mail</label>
             <input type="text" class="form-control" id="email" name="email"
                    value="{{ form.email.value|default_if_none:'' }}">
             <!-- name 속성값은 반드시 username로 할 것-->
         </div>
-        <button type="submit" class="btn btn-primary">sign up</button>
+        <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
-
 </div>
 {% endblock %}
