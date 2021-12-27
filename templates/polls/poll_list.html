@@ -13,13 +13,11 @@
             {% if question_list %}
                 {% for question in question_list  %}
                 <tr class="text-center">
-                    <td>
-                    {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
-                    </td>
+
                     <td class="text-left">
                         <!--링크 경로는 앱 네임을 사용함-->
                         <a href="{% url 'board:detail' question.id %}">
-                            {{ question.subject }}
+                            {{ question.subject }}<p> 설문조사 (바로가기) </p>
                         </a>
                         {% if question.answer_set.count > 0 %}
                     <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
@@ -31,15 +29,16 @@
         {% endfor %}
         {% else %}
         <tr>
-            <td colspan="3">질문이 없습니다.</td>
+            <td colspan="3">unknown</td>
+
         </tr>
         {% endif %}
         </tbody>
     </table>
     <ul class="pagination justify-content-center">
-        {% if question_list.has_previous %}
+        {% if poll_list.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ question_list.previous_page_number }}">prior</a>
+            <a class="page-link" href="?page={{ poll_list.previous_page_number }}">prior</a>
         </li>
         {% else %}
         <li class="page-item disabled">

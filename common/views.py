@@ -2,6 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
 from common.forms import UserForm
+from polls.models import Question
+
 
 def signup(request):
     #회원 가입
@@ -16,5 +18,29 @@ def signup(request):
             login(request, user)                     #로그인
             return redirect('board:index')
     else:
-        form = UserForm() #비어있는 새폼
+        form = UserForm()
     return render(request, 'common/signup.html', {'form':form})
+
+def index(request):
+    question_list = Question.objects.all()
+    return render(request, 'poll/index.html', {'question_list':question_list})
+
+
+# 상세 페이지
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'poll/detail.html', {'question':question})
+
+#투표 하기
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    try:
+        choice_id = request.POST['choice']
+        sel_choice = question.choice_set.get(id=choice_id)
+    except:
+        return render(request, 'poll/detail.html',
+                      {'question':question, 'error':'선택을 확인하세요'})
+    else:
+        sel_choice.votes = sel_choice.votes + 1
+        sel_choice.save()   #db에 저장
+        return render(request, 'poll/vote_result.html', {'question':question})

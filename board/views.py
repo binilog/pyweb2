@@ -185,3 +185,6 @@ def comment_delete_question(request, comment_id):
         comment.delete()
     return redirect('board:detail', question_id=comment.question_id)
 
+
+def vote():
+    return None

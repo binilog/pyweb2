@@ -9,8 +9,9 @@
             <span>or <a href="{% url 'common:signup' %}">create an account</a></span>
         </div>
     </div> <!--row 끝-->
-    <form action="" method="post" class="my-3">
+    <form method="post" class="post-form" action="{% url 'common:login' %}">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         {% include 'form_errors.html' %}
         <div class="form-group">
             <label for="username">UserID</label>

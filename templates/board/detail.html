@@ -58,7 +58,7 @@
                            data-uri="{% url 'board:answer_delete' answer.id  %}">Delete</a>
                     </div>
                     {% endif %}
-            <!-- 댓글 -->
+            <!-- 질문댓글 -->
                 {% if question.comment_set.count > 0 %}
                 <div class="mt-3">
                 {% for comment in question.comment_set.all %}
@@ -91,7 +91,7 @@
         {% csrf_token %}
         <!-- 오류 표시 시작 -->
             {% if form.errors %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" role="alert">
                 {% for field in form %}
                     {% if field.errors %}
                         <strong>{{ field.label }}</strong>
@@ -119,6 +119,11 @@
                 location.href = $(this).data('uri')
             }
         });
+        $(".recommend").on('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = $(this).data('uri');
+        }
+    });
     });
 </script>
 {% endblock %}

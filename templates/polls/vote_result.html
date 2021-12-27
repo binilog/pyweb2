@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>투표 결과</title>
+    <link rel="stylesheet" href="{% static 'poll/css/bootstrap.css' %}">
+</head>
+<body>
+    <div id="container">
+        <section>
+            <div class="jumbotron">
+                <div class="text-center">
+                    <h1>투표 결과</h1>
+                </div>
+            </div>
+            <h4 style="
+
+"
+            <ul>
+                {% for choice in question.choice_set.all %}
+                <li>
+                 {{ choice.choice_text }} -- {{ choice.votes }}votes
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
