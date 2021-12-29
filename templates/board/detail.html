@@ -72,18 +72,14 @@
                             {% endif %}
                         </span>
                         {% if request.user == comment.author %}
-                        <a href="{% url 'board:comment_modify_question' comment.id  %}" class="small">Modify</a>,
+                        <a href="#" class="small">Modify</a>,
                         <a href="#" class="small delete"
-                           data-uri="{% url 'board:comment_delete_question' comment.id  %}">Delete</a>
+                           data-uri="#">Delete</a>
                         {% endif %}
                     </div>
                 {% endfor %}
                 </div>
                 {% endif %}
-                <div>
-                    <a href="{% url 'board:comment_create_question' question.id  %}"
-                       class="small"><small>Add comment</small></a>
-                </div>
         </div>
     </div>
     {% endfor %}

@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="container">
+    <section>
     <table class="table">
         <thead class="thead-dark">
             <tr class="text-center">
@@ -69,5 +70,7 @@
         {% endif %}
     </ul>
     <a href="{% url 'board:question_create' %}" class="btn btn-primary">Register a question</a>
+        </section>
+
 </div>
 {% endblock %}

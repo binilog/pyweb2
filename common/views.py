@@ -26,21 +26,3 @@ def index(request):
     return render(request, 'poll/index.html', {'question_list':question_list})
 
 
-# 상세 페이지
-def detail(request, question_id):
-    question = Question.objects.get(id=question_id)
-    return render(request, 'poll/detail.html', {'question':question})
-
-#투표 하기
-def vote(request, question_id):
-    question = Question.objects.get(id=question_id)
-    try:
-        choice_id = request.POST['choice']
-        sel_choice = question.choice_set.get(id=choice_id)
-    except:
-        return render(request, 'poll/detail.html',
-                      {'question':question, 'error':'선택을 확인하세요'})
-    else:
-        sel_choice.votes = sel_choice.votes + 1
-        sel_choice.save()   #db에 저장
-        return render(request, 'poll/vote_result.html', {'question':question})

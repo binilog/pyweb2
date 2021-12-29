@@ -5,8 +5,10 @@ app_name = 'board'  #네임 스페이스 설정
 
 urlpatterns = [
     #127.0.0.1:8000/board/
-    #질문 목록
+    #메인
     path('', views.index, name='index'),
+    #질문 목록
+    path('boardlist/', views.boardlist, name='boardlist'),
     #질문/답변 상세
     path('<int:question_id>/', views.detail, name='detail'),
     #질문 등록
@@ -23,8 +25,7 @@ urlpatterns = [
     path('answer/modify/<int:answer_id>/', views.answer_modify, name='answer_modify'),
     #답변 삭제
     path('answer/delete/<int:answer_id>/', views.answer_delete, name='answer_delete'),
-
-    path('comment/create/question/<int:question_id>/', views.comment_create_question, name='comment_create_question'),
-    path('comment/modify/question/<int:comment_id>/', views.comment_modify_question, name='comment_modify_question'),
-    path('comment/delete/question/<int:comment_id>/', views.comment_delete_question, name='comment_delete_question'),
 ]
+    # path('comment/create/question/<int:question_id>/', views.comment_create_question, name='comment_create_question'),
+    # path('comment/modify/question/<int:comment_id>/', views.comment_modify_question, name='comment_modify_question'),
+    # path('comment/delete/question/<int:comment_id>/', views.comment_delete_question, name='comment_delete_question'),

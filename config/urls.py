@@ -23,8 +23,4 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('common/', include('common.urls')),
     path('polls/', include('polls.urls')),
-    path('control/', include('control.urls'))
-    path('', views.index, name='index'),
-    path('<int:question_id>/', views.detail, name='detail'),
-    path('<int:question_id>/vote/', views.vote, name='vote'),
 ]

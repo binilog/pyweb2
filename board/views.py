@@ -1,8 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.utils import timezone
-from pyexpat.errors import messages
 from django.core.paginator import Paginator
 
 from board.models import Question, Answer, Comment
@@ -101,7 +101,7 @@ def question_delete(request, question_id):
 def answer_modify(request, answer_id):
     answer = get_object_or_404(Answer, pk=answer_id)
     if request.user != answer.author:
-        return redirect('pybo:detail', question_id=answer.question.id)
+        return redirect('board:detail', question_id=answer.question.id)
 
     if request.method == "POST":
         form = AnswerForm(request.POST, instance=answer)
@@ -186,5 +186,27 @@ def comment_delete_question(request, comment_id):
     return redirect('board:detail', question_id=comment.question_id)
 
 
-def vote():
-    return None
+@login_required(login_url='common:login')
+def question_delete(request, question_id):
+    #질문 삭제
+    question = get_object_or_404(Question, pk=question_id)
+    question.delete() #질문 삭제
+    return redirect('board:index')
+
+
+@login_required(login_url='common:login')
+def answer_delete(request, answer_id):
+    #답변 삭제
+    answer = get_object_or_404(Answer, pk=answer_id)
+    answer.delete()
+    return redirect('board:detail', question_id=answer.question.id)
+
+
+def boardlist(request):
+    #질문 목록
+    question_list = Question.objects.order_by('-create_date')
+    page = request.GET.get('page', 1)  # 127.0.0.1:8000/ 기본 1페이지임
+    paginator = Paginator(question_list, 10)  # 페이지당 10개씩 설정
+    page_obj = paginator.get_page(page)  # 페이지 가져오기
+    return render(request, 'board/question_list.html', {'question_list': page_obj})
+

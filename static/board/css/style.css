@@ -2,3 +2,10 @@
     border-top:dotted 1px #ddd;
     font-size:0.7em;
 }
+
+section{height:650px;}
+
+
+footer .list-inline li{display:inline-block; margin:10px;}
+footer address{margin-left:10px; color:#ccc;}
+footer address p{line-height:0.7rem; font-size:0.9rem}
